@@ -3,461 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Integrated Wildlife Systems | EchoLink 2026</title>
+    <title>Integrated Wildlife Systems | 2026</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Playfair+Display:italic,wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-midnight: #0a0c0b;
-            --surface-deep: #141816;
             --forest-accent: #2d5a27;
             --glow-green: #4ade80;
-            --muted-text: #94a3b8;
-            --gold-leaf: #c5a059;
-            --border-subtle: rgba(255, 255, 255, 0.08);
-            --font-display: 'Space Grotesk', sans-serif;
-            --font-serif: 'Playfair Display', serif;
-            --font-body: 'Inter', sans-serif;
+            --muted: #475569;
         }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-
         body {
             background-color: var(--bg-midnight);
             color: #f1f5f9;
-            font-family: var(--font-body);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: url('https://grainy-gradients.vercel.app/noise.svg');
-            opacity: 0.03;
-            pointer-events: none;
-            z-index: 50;
-        }
-
-        nav {
-            padding: 30px 6%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(10, 12, 11, 0.8);
-            backdrop-filter: blur(20px);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid var(--border-subtle);
-        }
-
-        .logo {
-            font-family: var(--font-display);
-            font-weight: 700;
-            font-size: 1rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: #fff;
+            font-family: 'Inter', sans-serif;
             display: flex;
             align-items: center;
-            gap: 12px;
-        }
-
-        .status-badge {
-            font-size: 0.65rem;
-            background: rgba(74, 222, 128, 0.1);
-            color: var(--glow-green);
-            padding: 4px 12px;
-            border-radius: 100px;
-            border: 1px solid rgba(74, 222, 128, 0.2);
-            font-weight: 700;
-        }
-
-        .hero {
-            padding: 80px 6% 100px;
-            max-width: 1300px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            gap: 80px;
-            align-items: center;
-        }
-
-        .hero-tag {
-            color: var(--gold-leaf);
-            font-family: var(--font-display);
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.3em;
-            font-size: 0.8rem;
-            margin-bottom: 30px;
-            display: block;
-        }
-
-        h1 {
-            font-family: var(--font-display);
-            font-size: clamp(2.5rem, 5vw, 4.5rem);
-            font-weight: 700;
-            line-height: 1.05;
-            margin-bottom: 35px;
-            letter-spacing: -0.02em;
-        }
-
-        h1 em {
-            font-family: var(--font-serif);
-            font-style: italic;
-            font-weight: 400;
-            color: var(--gold-leaf);
-        }
-
-        .hero-copy {
-            font-size: 1.2rem;
-            color: var(--muted-text);
-            margin-bottom: 45px;
-            max-width: 520px;
-        }
-
-        .telemetry-node {
-            background: var(--surface-deep);
-            border: 1px solid var(--border-subtle);
-            border-radius: 12px;
-            padding: 40px;
-            position: relative;
-            box-shadow: 0 40px 100px rgba(0,0,0,0.5);
-        }
-
-        .node-header {
-            display: flex;
-            justify-content: space-between;
-            font-family: var(--font-display);
-            font-size: 0.7rem;
-            color: var(--muted-text);
-            letter-spacing: 0.1em;
-            margin-bottom: 30px;
-            border-bottom: 1px solid var(--border-subtle);
-            padding-bottom: 20px;
-        }
-
-        .data-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            font-family: 'Space Grotesk', monospace;
-            font-size: 0.9rem;
-        }
-
-        .data-label { color: var(--muted-text); }
-        .data-value { color: #fff; }
-
-        .signal-chart {
-            height: 40px;
-            display: flex;
-            align-items: flex-end;
-            gap: 4px;
-            margin-top: 30px;
-        }
-
-        .bar {
-            flex: 1;
-            background: var(--forest-accent);
-            border-radius: 2px 2px 0 0;
-            transition: height 0.4s ease;
-        }
-
-        /* Value Comparison Table Style */
-        .impact-section {
-            padding: 100px 6%;
-            background: #0a0c0b;
-            max-width: 1300px;
-            margin: 0 auto;
-        }
-
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 40px;
-            font-family: var(--font-display);
-        }
-
-        .comparison-table th {
-            text-align: left;
-            padding: 20px;
-            color: var(--muted-text);
-            text-transform: uppercase;
-            font-size: 0.7rem;
-            letter-spacing: 0.1em;
-            border-bottom: 1px solid var(--border-subtle);
-        }
-
-        .comparison-table td {
-            padding: 25px 20px;
-            border-bottom: 1px solid var(--border-subtle);
-            font-size: 1rem;
-        }
-
-        .highlight-col {
-            color: var(--glow-green);
-            font-weight: 700;
-            background: rgba(74, 222, 128, 0.02);
-        }
-
-        /* Grid Section */
-        .grid-section {
-            padding: 100px 6%;
-            background: #0f1211;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            border-top: 1px solid var(--border-subtle);
-        }
-
-        .feature-box i {
-            color: var(--glow-green);
-            font-size: 1.5rem;
-            margin-bottom: 25px;
-        }
-
-        .feature-box h3 {
-            font-family: var(--font-display);
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-            color: #fff;
-        }
-
-        .feature-box p {
-            color: var(--muted-text);
-            font-size: 0.95rem;
-        }
-
-        .cta-box {
-            padding: 120px 6%;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
             text-align: center;
         }
-
-        .cta-inner {
-            max-width: 900px;
-            margin: 0 auto;
-            background: linear-gradient(145deg, #141816 0%, #0a0c0b 100%);
-            padding: 80px 40px;
-            border-radius: 24px;
-            border: 1px solid var(--border-subtle);
+        .container {
+            padding: 20px;
         }
-
-        .email-capture {
-            display: flex;
-            max-width: 500px;
-            margin: 40px auto 0;
-            background: rgba(255,255,255,0.03);
-            border-radius: 8px;
-            padding: 6px;
-            border: 1px solid var(--border-subtle);
-        }
-
-        .email-capture input {
-            background: transparent;
-            border: none;
-            padding: 15px 20px;
-            color: white;
-            flex-grow: 1;
-            outline: none;
-        }
-
-        .email-capture button {
-            background: var(--forest-accent);
-            color: white;
-            border: none;
-            padding: 0 30px;
-            border-radius: 4px;
-            font-weight: 600;
-            font-family: var(--font-display);
-            cursor: pointer;
-        }
-
-        footer {
-            padding: 60px 6%;
-            display: flex;
-            justify-content: space-between;
-            color: #475569;
-            font-size: 0.75rem;
-            border-top: 1px solid var(--border-subtle);
-            font-family: var(--font-display);
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
             text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-size: 1rem;
+            color: var(--forest-accent);
+            margin-bottom: 10px;
         }
-
-        @media (max-width: 1024px) {
-            .hero { grid-template-columns: 1fr; text-align: center; }
-            .hero-copy { margin: 0 auto 40px; }
-            .grid-section { grid-template-columns: 1fr; }
-            .telemetry-node { max-width: 500px; margin: 0 auto; }
-            .comparison-table { font-size: 0.8rem; }
+        p {
+            font-size: 1.5rem;
+            font-weight: 300;
+            letter-spacing: -0.02em;
+        }
+        b {
+            font-weight: 700;
+            color: #fff;
+        }
+        .footer {
+            position: absolute;
+            bottom: 40px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--muted);
         }
     </style>
 </head>
 <body>
-
-    <nav>
-        <div class="logo">
-            <i class="fa-solid fa-wind" style="color: var(--glow-green);"></i>
-            Integrated Wildlife Systems
-        </div>
-        <div class="status-badge">
-            SATELLITE LINK: ESTABLISHED
-        </div>
-    </nav>
-
-    <main>
-        <section class="hero">
-            <div class="hero-text">
-                <span class="hero-tag">2026 Institutional Pilot</span>
-                <h1>Protecting the <em>unseen</em> nodes of our ecosystem.</h1>
-                <p class="hero-copy">
-                    EchoLink transforms individual Myotis bats into intelligent nodes in a shared sensing network—closing the 3-week detection gap for White-Nose Syndrome.
-                </p>
-                <div style="display: flex; gap: 20px; justify-content: inherit;">
-                    <button style="background: #fff; color: #000; border: none; padding: 18px 34px; border-radius: 4px; font-weight: 700; cursor: pointer; font-family: var(--font-display);">PILOT ROADMAP</button>
-                    <button style="background: transparent; color: #fff; border: 1px solid var(--border-subtle); padding: 18px 34px; border-radius: 4px; font-weight: 700; cursor: pointer; font-family: var(--font-display);">NY-DEC STANDARDS</button>
-                </div>
-            </div>
-
-            <div class="telemetry-node">
-                <div class="node-header">
-                    <span>PILOT: ADK_KARST_04</span>
-                    <span id="live-timer">22:06:11 UTC</span>
-                </div>
-                <div class="data-row">
-                    <span class="data-label">TELEMETRY LATENCY</span>
-                    <span class="data-value" style="color: var(--glow-green);">< 15 MINUTES</span>
-                </div>
-                <div class="data-row">
-                    <span class="data-label">TRANSMISSION</span>
-                    <span class="data-value">NTN SATELLITE</span>
-                </div>
-                <div class="data-row">
-                    <span class="data-label">STATUS</span>
-                    <span class="data-value">BIO-ANALYSIS ONLINE</span>
-                </div>
-                <div class="signal-chart" id="signal-bars"></div>
-                <p style="margin-top: 25px; font-size: 0.65rem; color: var(--muted-text); font-family: monospace;">
-                    [AUTONOMOUS_UPLINK_SECURE]
-                </p>
-            </div>
-        </section>
-
-        <!-- New Economic Impact Section from Slides -->
-        <section class="impact-section">
-            <span class="hero-tag">Economic Advantage</span>
-            <h2 style="font-family: var(--font-display); font-size: 2.5rem; margin-top: 10px;">Surpassing the Financial Wall.</h2>
-            <table class="comparison-table">
-                <thead>
-                    <tr>
-                        <th>Metric</th>
-                        <th>Traditional VHF</th>
-                        <th class="highlight-col">EchoLink Platform</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Cost per Individual</td>
-                        <td>$250 - $500</td>
-                        <td class="highlight-col">< $50 (at scale)</td>
-                    </tr>
-                    <tr>
-                        <td>Detection Latency</td>
-                        <td>3 - 6 Weeks</td>
-                        <td class="highlight-col">< 15 Minutes</td>
-                    </tr>
-                    <tr>
-                        <td>Handling Requirement</td>
-                        <td>Repeated Mist-Netting</td>
-                        <td class="highlight-col">One-Time Placement</td>
-                    </tr>
-                    <tr>
-                        <td>Data Continuity</td>
-                        <td>Field Hours Only</td>
-                        <td class="highlight-col">24/7 Autonomous</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-        <section class="grid-section">
-            <div class="feature-box">
-                <i class="fa-solid fa-leaf"></i>
-                <h3>Sustainability</h3>
-                <p>Compostable Chitin and Hemp housing. Hardware is designed to be biologically invisible and disintegrate naturally after the monitoring period ends.</p>
-            </div>
-            <div class="feature-box">
-                <i class="fa-solid fa-satellite-dish"></i>
-                <h3>Infrastructure-Free</h3>
-                <p>Direct-to-Cell LEO satellite connectivity removes the "Labor Wall" of manual tracking in deep Adirondack wilderness and karst zones.</p>
-            </div>
-            <div class="feature-box">
-                <i class="fa-solid fa-lock"></i>
-                <h3>Sovereign Privacy</h3>
-                <p>Sensitive hibernacula coordinates are secured via proprietary encryption, ensuring critical habitat data remains exclusive to agency stakeholders.</p>
-            </div>
-        </section>
-
-        <section class="cta-box">
-            <div class="cta-inner">
-                <span class="hero-tag">Institutional Contact</span>
-                <h2 style="font-family: var(--font-display); font-size: 2.5rem; margin-top: 10px;">Secure the 2026 Pilot.</h2>
-                <p style="color: var(--muted-text); margin-top: 20px; font-size: 1.1rem;">Seeking collaboration with DEC and research foundations for Saratoga/Albany deployments.</p>
-                <div class="email-capture">
-                    <input type="email" placeholder="Institutional Email" required>
-                    <button type="submit">INQUIRE</button>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div>IWS // 2026 PILOT PLATFORM</div>
-        <div style="display:flex; gap:30px;">
-            <a href="#" style="color:inherit; text-decoration:none;">ETHICS</a>
-            <a href="#" style="color:inherit; text-decoration:none;">DEC COMPLIANCE</a>
-        </div>
-    </footer>
-
-    <script>
-        function updateClock() {
-            const now = new Date();
-            const timeString = now.getUTCHours().toString().padStart(2, '0') + ":" + 
-                               now.getUTCMinutes().toString().padStart(2, '0') + ":" + 
-                               now.getUTCSeconds().toString().padStart(2, '0') + " UTC";
-            document.getElementById('live-timer').textContent = timeString;
-        }
-
-        function initBars() {
-            const container = document.getElementById('signal-bars');
-            for(let i=0; i<25; i++) {
-                const bar = document.createElement('div');
-                bar.className = 'bar';
-                bar.style.height = Math.random() * 100 + '%';
-                container.appendChild(bar);
-            }
-        }
-
-        function animateData() {
-            const bars = document.querySelectorAll('.bar');
-            setInterval(() => {
-                bars.forEach(bar => {
-                    bar.style.height = Math.random() * 100 + '%';
-                });
-            }, 1500);
-        }
-
-        window.addEventListener('load', () => {
-            initBars();
-            animateData();
-            setInterval(updateClock, 1000);
-        });
-    </script>
+    <div class="container">
+        <h1>Integrated Wildlife Systems</h1>
+        <p>The <b>Echo</b>Link Platform is arriving 2026.</p>
+    </div>
+    <div class="footer">
+        Albany, New York // Institutional Access Pending
+    </div>
 </body>
 </html>
 
