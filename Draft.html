@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Integrated Wildlife Systems | EchoLink 2026</title>
+    <title>DRAFT | Integrated Wildlife Systems | EchoLink 2026</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Playfair+Display:italic,wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
@@ -169,7 +169,6 @@
             transition: height 0.4s ease;
         }
 
-        /* Value Comparison Table Style */
         .impact-section {
             padding: 100px 6%;
             background: #0a0c0b;
@@ -206,7 +205,6 @@
             background: rgba(74, 222, 128, 0.02);
         }
 
-        /* Grid Section */
         .grid-section {
             padding: 100px 6%;
             background: #0f1211;
@@ -248,6 +246,7 @@
             border: 1px solid var(--border-subtle);
         }
 
+        /* UPDATED FORM STYLES */
         .email-capture {
             display: flex;
             max-width: 500px;
@@ -265,6 +264,7 @@
             color: white;
             flex-grow: 1;
             outline: none;
+            font-family: var(--font-body);
         }
 
         .email-capture button {
@@ -276,6 +276,11 @@
             font-weight: 600;
             font-family: var(--font-display);
             cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .email-capture button:hover {
+            background: #3d7a35;
         }
 
         footer {
@@ -295,6 +300,9 @@
             .grid-section { grid-template-columns: 1fr; }
             .telemetry-node { max-width: 500px; margin: 0 auto; }
             .comparison-table { font-size: 0.8rem; }
+            .email-capture { flex-direction: column; background: transparent; border: none; gap: 10px; }
+            .email-capture input { background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 8px; }
+            .email-capture button { padding: 15px; border-radius: 8px; }
         }
     </style>
 </head>
@@ -348,7 +356,6 @@
             </div>
         </section>
 
-        <!-- New Economic Impact Section from Slides -->
         <section class="impact-section">
             <span class="hero-tag">Economic Advantage</span>
             <h2 style="font-family: var(--font-display); font-size: 2.5rem; margin-top: 10px;">Surpassing the Financial Wall.</h2>
@@ -408,10 +415,15 @@
                 <span class="hero-tag">Institutional Contact</span>
                 <h2 style="font-family: var(--font-display); font-size: 2.5rem; margin-top: 10px;">Secure the 2026 Pilot.</h2>
                 <p style="color: var(--muted-text); margin-top: 20px; font-size: 1.1rem;">Seeking collaboration with DEC and research foundations for Saratoga/Albany deployments.</p>
-                <div class="email-capture">
-                    <input type="email" placeholder="Institutional Email" required>
+                
+                <!-- UPDATED FORM FOR FORMSPREE -->
+                <form action="https://formspree.io/f/your-email@example.com" method="POST" class="email-capture">
+                    <input type="email" name="email" placeholder="Institutional Email" required>
+                    <!-- Hidden field to give the email a subject line -->
+                    <input type="hidden" name="_subject" value="New Inquiry: EchoLink 2026 Pilot">
                     <button type="submit">INQUIRE</button>
-                </div>
+                </form>
+                
             </div>
         </section>
     </main>
@@ -435,6 +447,7 @@
 
         function initBars() {
             const container = document.getElementById('signal-bars');
+            if(!container) return;
             for(let i=0; i<25; i++) {
                 const bar = document.createElement('div');
                 bar.className = 'bar';
