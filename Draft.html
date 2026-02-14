@@ -417,10 +417,16 @@
                 
                 <form action="https://formspree.io/f/maqdooyp" method="POST" class="email-capture">
                     <input type="email" name="email" placeholder="Institutional Email" required>
+                    
+                    <!-- THE FREE REDIRECT (Case-sensitive to match Thanks.html) -->
+                    <input type="hidden" name="_next" value="https://integratedwildlifesystems.com/Thanks.html">
+                    
                     <!-- Formatting subject for inbox organization -->
                     <input type="hidden" name="_subject" value="New Inquiry: EchoLink 2026 Pilot">
+                    
                     <!-- Ensures reply goes to the researcher who inquired -->
                     <input type="hidden" name="_replyto" value="%email%">
+                    
                     <button type="submit">INQUIRE</button>
                 </form>
                 
