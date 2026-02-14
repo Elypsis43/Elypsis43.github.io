@@ -286,11 +286,28 @@
             padding: 60px 6%;
             display: flex;
             justify-content: space-between;
+            align-items: center;
             color: #475569;
             font-size: 0.75rem;
             border-top: 1px solid var(--border-subtle);
             font-family: var(--font-display);
             text-transform: uppercase;
+        }
+
+        .footer-links {
+            display: flex; 
+            gap: 40px;
+        }
+
+        .footer-links a {
+            color: inherit;
+            text-decoration: none;
+            padding: 10px 0; /* Larger touch target */
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--glow-green);
         }
 
         #status-msg {
@@ -310,6 +327,17 @@
             .email-capture { flex-direction: column; background: transparent; border: none; gap: 10px; }
             .email-capture input { background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 8px; }
             .email-capture button { padding: 15px; border-radius: 8px; }
+            
+            footer {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            .footer-links {
+                gap: 30px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -437,10 +465,9 @@
 
     <footer>
         <div>IWS // 2026 PILOT PLATFORM</div>
-        <div style="display:flex; gap:30px;">
-            <a href="Ethics.html" style="color:inherit; text-decoration: none; ">ETHICS</
-            <a href="Compliance.html" style="color:inherit; text-decoration:none;">DEC COMPLIANCE</a>
-
+        <div class="footer-links">
+            <a href="Ethics.html">ETHICS</a>
+            <a href="Compliance.html">DEC COMPLIANCE</a>
         </div>
     </footer>
 
@@ -470,11 +497,9 @@
 
                 if (response.ok) {
                     // SUCCESS: Manually redirect to your custom page
-                    // REPLACE yourdomain.com with your actual URL
                     window.location.href = "https://integratedwildlifesystems.com/Thanks.html"; 
                 } else {
                     // HANDLE ERROR (e.g. invalid email)
-                    const result = await response.json();
                     statusMsg.style.display = "block";
                     statusMsg.style.color = "#ff6b6b";
                     statusMsg.innerText = "Error: Please check your email address.";
