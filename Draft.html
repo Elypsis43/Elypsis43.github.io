@@ -327,6 +327,7 @@
             color: white;
             flex-grow: 1;
             outline: none;
+            font-family: var(--font-body);
         }
 
         .email-capture button {
@@ -338,6 +339,15 @@
             font-weight: 600;
             font-family: var(--font-display);
             cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        #status-msg {
+            margin-top: 15px;
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
         }
 
         footer {
@@ -398,7 +408,7 @@
                 </p>
                 <div class="btn-group">
                     <a href="Roadmap.html" class="primary-btn">PILOT ROADMAP</a>
-                    <a href="Regulatory.html" class="secondary-btn">NY-DEC STANDARDS</a>
+                    <a href="Standards.html" class="secondary-btn">NY-DEC STANDARDS</a>
                 </div>
             </div>
 
@@ -473,7 +483,7 @@
             <div class="feature-box">
                 <i class="fa-solid fa-leaf"></i>
                 <h3>Sustainability</h3>
-                <p>Compostable Chitin and Hemp housing. Hardware is designed to be biologically invisible and disintegrate naturally.</p>
+                <p>Compostable Chitin and Hemp housing. Hardware is designed to be biologically invisible and disintegrate naturally after use.</p>
             </div>
             <div class="feature-box">
                 <i class="fa-solid fa-satellite-dish"></i>
@@ -483,7 +493,7 @@
             <div class="feature-box">
                 <i class="fa-solid fa-lock"></i>
                 <h3>Sovereign Privacy</h3>
-                <p>Sensitive coordinates are secured via AES-256, ensuring critical habitat data remains exclusive to agency stakeholders.</p>
+                <p>Sensitive habitat coordinates are secured via AES-256, ensuring critical data remains exclusive to agency stakeholders.</p>
             </div>
         </section>
 
@@ -491,10 +501,13 @@
             <div class="cta-inner">
                 <span class="hero-tag" style="justify-content: center;">Institutional Contact</span>
                 <h2 style="font-family: var(--font-display); font-size: 2.5rem; margin-top: 10px;">Secure the 2026 Pilot.</h2>
+                
                 <form id="contact-form" action="https://formspree.io/f/maqdooyp" method="POST" class="email-capture">
-                    <input type="email" name="email" placeholder="Institutional Email" required>
-                    <button type="submit">INQUIRE</button>
+                    <input type="email" name="email" id="email-field" placeholder="Institutional Email" required>
+                    <input type="hidden" name="_subject" value="New Inquiry: EchoLink 2026 Pilot">
+                    <button type="submit" id="submit-btn">INQUIRE</button>
                 </form>
+                <p id="status-msg" style="display: none;"></p>
             </div>
         </section>
     </main>
@@ -508,6 +521,48 @@
     </footer>
 
     <script>
+        // FORMSPREE REDIRECT BYPASS
+        const form = document.getElementById("contact-form");
+        const submitBtn = document.getElementById("submit-btn");
+        const statusMsg = document.getElementById("status-msg");
+
+        form.addEventListener("submit", async function(event) {
+            event.preventDefault();
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = "SENDING...";
+            submitBtn.style.opacity = "0.5";
+
+            const data = new FormData(event.target);
+            
+            try {
+                const response = await fetch(event.target.action, {
+                    method: 'POST',
+                    body: data,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    window.location.href = "https://integratedwildlifesystems.com/Thanks.html"; 
+                } else {
+                    statusMsg.style.display = "block";
+                    statusMsg.style.color = "#ff6b6b";
+                    statusMsg.innerText = "Error: Please check your email address.";
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = "INQUIRE";
+                    submitBtn.style.opacity = "1";
+                }
+            } catch (error) {
+                statusMsg.style.display = "block";
+                statusMsg.style.color = "#ff6b6b";
+                statusMsg.innerText = "Uplink Failure. Check connection.";
+                submitBtn.disabled = false;
+                submitBtn.textContent = "INQUIRE";
+                submitBtn.style.opacity = "1";
+            }
+        });
+
+        // UI ANIMATIONS
         function updateClock() {
             const now = new Date();
             const timeString = now.getUTCHours().toString().padStart(2, '0') + ":" + 
