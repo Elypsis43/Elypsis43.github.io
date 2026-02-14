@@ -503,7 +503,10 @@
                 <h2 style="font-family: var(--font-display); font-size: 2.5rem; margin-top: 10px;">Secure the 2026 Pilot.</h2>
                 
                 <form id="contact-form" action="https://formspree.io/f/maqdooyp" method="POST" class="email-capture">
+                    <!-- name="email" is critical for Formspree "Reply-To" -->
                     <input type="email" name="email" id="email-field" placeholder="Institutional Email" required>
+                    <!-- name="_replyto" ensures standard email clients find the contact address -->
+                    <input type="hidden" name="_replyto" id="reply-to-shadow">
                     <input type="hidden" name="_subject" value="New Inquiry: EchoLink 2026 Pilot">
                     <button type="submit" id="submit-btn">INQUIRE</button>
                 </form>
@@ -521,10 +524,16 @@
     </footer>
 
     <script>
-        // FORMSPREE REDIRECT BYPASS
         const form = document.getElementById("contact-form");
+        const emailInput = document.getElementById("email-field");
+        const shadowInput = document.getElementById("reply-to-shadow");
         const submitBtn = document.getElementById("submit-btn");
         const statusMsg = document.getElementById("status-msg");
+
+        // Sync the hidden reply-to field whenever user types
+        emailInput.addEventListener("input", (e) => {
+            shadowInput.value = e.target.value;
+        });
 
         form.addEventListener("submit", async function(event) {
             event.preventDefault();
@@ -543,26 +552,30 @@
                 });
 
                 if (response.ok) {
+                    // Success: Redirect to custom thanks page
                     window.location.href = "https://integratedwildlifesystems.com/Thanks.html"; 
                 } else {
+                    const result = await response.json();
                     statusMsg.style.display = "block";
                     statusMsg.style.color = "#ff6b6b";
-                    statusMsg.innerText = "Error: Please check your email address.";
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = "INQUIRE";
-                    submitBtn.style.opacity = "1";
+                    statusMsg.innerText = result.errors ? result.errors[0].message : "Error: Check email format.";
+                    resetBtn();
                 }
             } catch (error) {
                 statusMsg.style.display = "block";
                 statusMsg.style.color = "#ff6b6b";
                 statusMsg.innerText = "Uplink Failure. Check connection.";
-                submitBtn.disabled = false;
-                submitBtn.textContent = "INQUIRE";
-                submitBtn.style.opacity = "1";
+                resetBtn();
             }
         });
 
-        // UI ANIMATIONS
+        function resetBtn() {
+            submitBtn.disabled = false;
+            submitBtn.textContent = "INQUIRE";
+            submitBtn.style.opacity = "1";
+        }
+
+        // UI UTILITIES
         function updateClock() {
             const now = new Date();
             const timeString = now.getUTCHours().toString().padStart(2, '0') + ":" + 
