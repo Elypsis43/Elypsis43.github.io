@@ -31,6 +31,7 @@
             font-family: var(--font-body);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
 
         body::before {
@@ -44,11 +45,11 @@
         }
 
         nav {
-            padding: 30px 6%;
+            padding: 20px 6%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(10, 12, 11, 0.8);
+            background: rgba(10, 12, 11, 0.9);
             backdrop-filter: blur(20px);
             position: sticky;
             top: 0;
@@ -59,7 +60,7 @@
         .logo {
             font-family: var(--font-display);
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 0.9rem;
             letter-spacing: 0.1em;
             text-transform: uppercase;
             color: #fff;
@@ -72,19 +73,36 @@
             font-size: 0.65rem;
             background: rgba(74, 222, 128, 0.1);
             color: var(--glow-green);
-            padding: 4px 12px;
+            padding: 6px 14px;
             border-radius: 100px;
             border: 1px solid rgba(74, 222, 128, 0.2);
             font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pulse-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--glow-green);
+            border-radius: 50%;
+            animation: pulse-op 2s infinite;
+        }
+
+        @keyframes pulse-op {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
         }
 
         .hero {
-            padding: 80px 6% 100px;
+            padding: 60px 6% 100px;
             max-width: 1300px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: 1.1fr 0.9fr;
-            gap: 80px;
+            gap: 60px;
             align-items: center;
         }
 
@@ -95,8 +113,19 @@
             text-transform: uppercase;
             letter-spacing: 0.3em;
             font-size: 0.8rem;
-            margin-bottom: 30px;
-            display: block;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .trl-tag {
+            background: var(--forest-accent);
+            color: #fff;
+            padding: 2px 8px;
+            font-size: 0.6rem;
+            border-radius: 3px;
+            letter-spacing: 0.1em;
         }
 
         h1 {
@@ -121,6 +150,38 @@
             margin-bottom: 45px;
             max-width: 520px;
         }
+
+        .btn-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .primary-btn {
+            background: #fff;
+            color: #000;
+            text-decoration: none;
+            padding: 18px 34px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-family: var(--font-display);
+            transition: all 0.3s ease;
+        }
+
+        .secondary-btn {
+            background: transparent;
+            color: #fff;
+            text-decoration: none;
+            border: 1px solid var(--border-subtle);
+            padding: 18px 34px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-family: var(--font-display);
+            transition: all 0.3s ease;
+        }
+
+        .primary-btn:hover { background: var(--glow-green); transform: translateY(-2px); }
+        .secondary-btn:hover { border-color: #fff; transform: translateY(-2px); }
 
         .telemetry-node {
             background: var(--surface-deep);
@@ -171,16 +232,23 @@
 
         .impact-section {
             padding: 100px 6%;
-            background: #0a0c0b;
             max-width: 1300px;
             margin: 0 auto;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            margin-top: 40px;
+            background: rgba(255,255,255,0.01);
+            border-radius: 8px;
+            border: 1px solid var(--border-subtle);
         }
 
         .comparison-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 40px;
             font-family: var(--font-display);
+            min-width: 600px;
         }
 
         .comparison-table th {
@@ -232,11 +300,6 @@
             font-size: 0.95rem;
         }
 
-        .cta-box {
-            padding: 120px 6%;
-            text-align: center;
-        }
-
         .cta-inner {
             max-width: 900px;
             margin: 0 auto;
@@ -244,6 +307,7 @@
             padding: 80px 40px;
             border-radius: 24px;
             border: 1px solid var(--border-subtle);
+            text-align: center;
         }
 
         .email-capture {
@@ -263,7 +327,6 @@
             color: white;
             flex-grow: 1;
             outline: none;
-            font-family: var(--font-body);
         }
 
         .email-capture button {
@@ -275,11 +338,6 @@
             font-weight: 600;
             font-family: var(--font-display);
             cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        .email-capture button:hover {
-            background: #3d7a35;
         }
 
         footer {
@@ -294,50 +352,23 @@
             text-transform: uppercase;
         }
 
-        .footer-links {
-            display: flex; 
-            gap: 40px;
-        }
-
-        .footer-links a {
-            color: inherit;
-            text-decoration: none;
-            padding: 10px 0; /* Larger touch target */
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: var(--glow-green);
-        }
-
-        #status-msg {
-            margin-top: 15px;
-            font-family: var(--font-display);
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
         @media (max-width: 1024px) {
-            .hero { grid-template-columns: 1fr; text-align: center; }
+            .hero { grid-template-columns: 1fr; text-align: center; padding-top: 40px; }
             .hero-copy { margin: 0 auto 40px; }
+            .btn-group { justify-content: center; }
+            .hero-tag { justify-content: center; }
             .grid-section { grid-template-columns: 1fr; }
-            .telemetry-node { max-width: 500px; margin: 0 auto; }
-            .comparison-table { font-size: 0.8rem; }
+            .telemetry-node { max-width: 500px; margin: 40px auto 0; }
             .email-capture { flex-direction: column; background: transparent; border: none; gap: 10px; }
             .email-capture input { background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 8px; }
             .email-capture button { padding: 15px; border-radius: 8px; }
-            
-            footer {
-                flex-direction: column;
-                gap: 20px;
-                text-align: center;
-            }
-            .footer-links {
-                gap: 30px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
+            footer { flex-direction: column; gap: 20px; text-align: center; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2.2rem; }
+            .status-badge { padding: 4px 8px; font-size: 0.55rem; }
+            .logo { font-size: 0.75rem; }
         }
     </style>
 </head>
@@ -349,6 +380,7 @@
             Integrated Wildlife Systems
         </div>
         <div class="status-badge">
+            <div class="pulse-dot"></div>
             SATELLITE LINK: ESTABLISHED
         </div>
     </nav>
@@ -356,21 +388,24 @@
     <main>
         <section class="hero">
             <div class="hero-text">
-                <span class="hero-tag">2026 Institutional Pilot</span>
+                <span class="hero-tag">
+                    2026 Institutional Pilot
+                    <span class="trl-tag">TRL-6</span>
+                </span>
                 <h1>Protecting the <em>unseen</em> nodes of our ecosystem.</h1>
                 <p class="hero-copy">
                     EchoLink transforms individual Myotis bats into intelligent nodes in a shared sensing network—closing the 3-week detection gap for White-Nose Syndrome.
                 </p>
-                <div style="display: flex; gap: 20px; justify-content: inherit;">
-                    <button style="background: #fff; color: #000; border: none; padding: 18px 34px; border-radius: 4px; font-weight: 700; cursor: pointer; font-family: var(--font-display);">PILOT ROADMAP</button>
-                    <button style="background: transparent; color: #fff; border: 1px solid var(--border-subtle); padding: 18px 34px; border-radius: 4px; font-weight: 700; cursor: pointer; font-family: var(--font-display);">NY-DEC STANDARDS</button>
+                <div class="btn-group">
+                    <a href="Roadmap.html" class="primary-btn">PILOT ROADMAP</a>
+                    <a href="Standards.html" class="secondary-btn">NY-DEC STANDARDS</a>
                 </div>
             </div>
 
             <div class="telemetry-node">
                 <div class="node-header">
                     <span>PILOT: ADK_KARST_04</span>
-                    <span id="live-timer">22:06:11 UTC</span>
+                    <span id="live-timer">00:00:00 UTC</span>
                 </div>
                 <div class="data-row">
                     <span class="data-label">TELEMETRY LATENCY</span>
@@ -392,133 +427,87 @@
         </section>
 
         <section class="impact-section">
-            <span class="hero-tag">Economic Advantage</span>
+            <span class="hero-tag">Comparative Metrics</span>
             <h2 style="font-family: var(--font-display); font-size: 2.5rem; margin-top: 10px;">Surpassing the Financial Wall.</h2>
-            <table class="comparison-table">
-                <thead>
-                    <tr>
-                        <th>Metric</th>
-                        <th>Traditional VHF</th>
-                        <th class="highlight-col">EchoLink Platform</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Cost per Individual</td>
-                        <td>$250 - $500</td>
-                        <td class="highlight-col">< $50 (at scale)</td>
-                    </tr>
-                    <tr>
-                        <td>Detection Latency</td>
-                        <td>3 - 6 Weeks</td>
-                        <td class="highlight-col">< 15 Minutes</td>
-                    </tr>
-                    <tr>
-                        <td>Handling Requirement</td>
-                        <td>Repeated Mist-Netting</td>
-                        <td class="highlight-col">One-Time Placement</td>
-                    </tr>
-                    <tr>
-                        <td>Data Continuity</td>
-                        <td>Field Hours Only</td>
-                        <td class="highlight-col">24/7 Autonomous</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Performance Metric</th>
+                            <th>Traditional VHF</th>
+                            <th class="highlight-col">EchoLink Platform</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Unit Cost (Scalable)</td>
+                            <td>$250 - $500</td>
+                            <td class="highlight-col">< $50.00</td>
+                        </tr>
+                        <tr>
+                            <td>Labor Hours (per season)</td>
+                            <td>~400 Field Hours</td>
+                            <td class="highlight-col">0 (Autonomous)</td>
+                        </tr>
+                        <tr>
+                            <td>Detection Latency</td>
+                            <td>3 - 6 Weeks</td>
+                            <td class="highlight-col">< 15 Minutes</td>
+                        </tr>
+                        <tr>
+                            <td>Total Cost (10 Units)</td>
+                            <td>$12,500.00+</td>
+                            <td class="highlight-col">$500.00</td>
+                        </tr>
+                        <tr>
+                            <td>Biocompatibility</td>
+                            <td>Plastic/Epoxy</td>
+                            <td class="highlight-col">Biodegradable Chitin</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </section>
 
         <section class="grid-section">
             <div class="feature-box">
                 <i class="fa-solid fa-leaf"></i>
                 <h3>Sustainability</h3>
-                <p>Compostable Chitin and Hemp housing. Hardware is designed to be biologically invisible and disintegrate naturally after the monitoring period ends.</p>
+                <p>Compostable Chitin and Hemp housing. Hardware is designed to be biologically invisible and disintegrate naturally.</p>
             </div>
             <div class="feature-box">
                 <i class="fa-solid fa-satellite-dish"></i>
                 <h3>Infrastructure-Free</h3>
-                <p>Direct-to-Cell LEO satellite connectivity removes the "Labor Wall" of manual tracking in deep Adirondack wilderness and karst zones.</p>
+                <p>Direct-to-Cell LEO satellite connectivity removes the "Labor Wall" of manual tracking in deep wilderness.</p>
             </div>
             <div class="feature-box">
                 <i class="fa-solid fa-lock"></i>
                 <h3>Sovereign Privacy</h3>
-                <p>Sensitive hibernacula coordinates are secured via proprietary encryption, ensuring critical habitat data remains exclusive to agency stakeholders.</p>
+                <p>Sensitive coordinates are secured via AES-256, ensuring critical habitat data remains exclusive to agency stakeholders.</p>
             </div>
         </section>
 
-        <section class="cta-box">
+        <section style="padding: 100px 6%;">
             <div class="cta-inner">
-                <span class="hero-tag">Institutional Contact</span>
+                <span class="hero-tag" style="justify-content: center;">Institutional Contact</span>
                 <h2 style="font-family: var(--font-display); font-size: 2.5rem; margin-top: 10px;">Secure the 2026 Pilot.</h2>
-                <p style="color: var(--muted-text); margin-top: 20px; font-size: 1.1rem;">Seeking collaboration with DEC and research foundations for Saratoga/Albany deployments.</p>
-                
                 <form id="contact-form" action="https://formspree.io/f/maqdooyp" method="POST" class="email-capture">
-                    <input type="email" name="email" id="email-field" placeholder="Institutional Email" required>
-                    <!-- Internal subject formatting -->
-                    <input type="hidden" name="_subject" value="New Inquiry: EchoLink 2026 Pilot">
-                    <button type="submit" id="submit-btn">INQUIRE</button>
+                    <input type="email" name="email" placeholder="Institutional Email" required>
+                    <button type="submit">INQUIRE</button>
                 </form>
-                <p id="status-msg" style="display: none;"></p>
-                
             </div>
         </section>
     </main>
 
     <footer>
         <div>IWS // 2026 PILOT PLATFORM</div>
-        <div class="footer-links">
-            <a href="Ethics.html">ETHICS</a>
-            <a href="Compliance.html">DEC COMPLIANCE</a>
+        <div style="display: flex; gap: 40px;">
+            <a href="Ethics.html" style="color: inherit; text-decoration: none;">ETHICS</a>
+            <a href="Compliance.html" style="color: inherit; text-decoration: none;">COMPLIANCE</a>
         </div>
     </footer>
 
     <script>
-        // REDIRECT BYPASS SCRIPT
-        const form = document.getElementById("contact-form");
-        const submitBtn = document.getElementById("submit-btn");
-        const statusMsg = document.getElementById("status-msg");
-
-        form.addEventListener("submit", async function(event) {
-            event.preventDefault(); // Stop standard browser behavior
-            
-            submitBtn.disabled = true;
-            submitBtn.textContent = "SENDING...";
-            submitBtn.style.opacity = "0.5";
-
-            const data = new FormData(event.target);
-            
-            try {
-                const response = await fetch(event.target.action, {
-                    method: 'POST',
-                    body: data,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-
-                if (response.ok) {
-                    // SUCCESS: Manually redirect to your custom page
-                    window.location.href = "https://integratedwildlifesystems.com/Thanks.html"; 
-                } else {
-                    // HANDLE ERROR (e.g. invalid email)
-                    statusMsg.style.display = "block";
-                    statusMsg.style.color = "#ff6b6b";
-                    statusMsg.innerText = "Error: Please check your email address.";
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = "INQUIRE";
-                    submitBtn.style.opacity = "1";
-                }
-            } catch (error) {
-                // NETWORK ERROR
-                statusMsg.style.display = "block";
-                statusMsg.style.color = "#ff6b6b";
-                statusMsg.innerText = "Uplink Failure. Check connection.";
-                submitBtn.disabled = false;
-                submitBtn.textContent = "INQUIRE";
-                submitBtn.style.opacity = "1";
-            }
-        });
-
-        // UI ANIMATIONS & UTILITIES
         function updateClock() {
             const now = new Date();
             const timeString = now.getUTCHours().toString().padStart(2, '0') + ":" + 
@@ -529,8 +518,7 @@
 
         function initBars() {
             const container = document.getElementById('signal-bars');
-            if(!container) return;
-            for(let i=0; i<25; i++) {
+            for(let i=0; i<30; i++) {
                 const bar = document.createElement('div');
                 bar.className = 'bar';
                 bar.style.height = Math.random() * 100 + '%';
@@ -551,6 +539,7 @@
             initBars();
             animateData();
             setInterval(updateClock, 1000);
+            updateClock();
         });
     </script>
 </body>
